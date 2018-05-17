@@ -31,7 +31,27 @@ See https://github.com/adobe-type-tools/cmap-resources
 
     <link rel="stylesheet" href="viewer.css">
 
-
+    <script>
+      var DEFAULT_URL = "";//注意，删除的变量在这里重新定义  
+var PDFData = "";  
+console.info(location.search.replace('?file=',""))
+$.ajax({  
+    type:"post",  
+    async:false,  //
+    mimeType: 'text/plain; charset=x-user-defined',  
+    url:location.search.replace('?file=',""),  
+    success:function(data){  
+       PDFData = data;  
+    }  
+});  
+var rawLength = PDFData.length;  
+//转换成pdf.js能直接解析的Uint8Array类型,见pdf.js-4068  
+var array = new Uint8Array(new ArrayBuffer(rawLength));    
+for(i = 0; i < rawLength; i++) {  
+  array[i] = PDFData.charCodeAt(i) & 0xff;  
+}  
+DEFAULT_URL = array;
+    </script>
 
 <!-- This snippet is used in production (included from viewer.html) -->
 <link rel="resource" type="application/l10n" href="locale/locale.properties">
