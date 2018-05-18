@@ -26,33 +26,10 @@ See https://github.com/adobe-type-tools/cmap-resources
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="google" content="notranslate">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
     <title>PDF.js viewer</title>
 
 
     <link rel="stylesheet" href="viewer.css">
-
-    <script>
-      var DEFAULT_URL = "";//注意，删除的变量在这里重新定义  
-var PDFData = "";  
-console.info(location.search.replace('?file=',""))
-$.ajax({  
-    type:"post",  
-    async:false,  //
-    mimeType: 'text/plain; charset=x-user-defined',  
-    url:location.search.replace('?file=',""),  
-    success:function(data){  
-       PDFData = data;  
-    }  
-});  
-var rawLength = PDFData.length;  
-//转换成pdf.js能直接解析的Uint8Array类型,见pdf.js-4068  
-var array = new Uint8Array(new ArrayBuffer(rawLength));    
-for(i = 0; i < rawLength; i++) {  
-  array[i] = PDFData.charCodeAt(i) & 0xff;  
-}  
-DEFAULT_URL = array;
-    </script>
 
 <!-- This snippet is used in production (included from viewer.html) -->
 <link rel="resource" type="application/l10n" href="locale/locale.properties">
